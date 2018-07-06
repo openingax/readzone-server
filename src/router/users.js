@@ -1,4 +1,8 @@
 import express from 'express'
+import { 
+    MESSAGE,
+    validate,
+ } from '../config'
 
 const router = express.Router();
 
@@ -14,8 +18,8 @@ router.post('/login', (req, res) => {
             code: 0,
             message: '请求成功',
             data: {
-                user: user ? account : null,
-                key: user ? 123456 : null,
+                user: user ? account : "",
+                key: user ? 123456 : "",
             }
         })
     }
