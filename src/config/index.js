@@ -5,6 +5,14 @@ export const MESSAGE = {
         code: 0,
         message: '请求成功',
     },
+    REGISTER_SUCCESS: {
+        code: 0,
+        message: '请求成功',
+        result: {
+            desc: '注册成功',
+            code: 0,
+        }
+    },
     PASSWORD_ERROR: {
         code: 300,
         message: '密码错误',

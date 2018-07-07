@@ -1,27 +1,48 @@
 import express from 'express'
-import { 
-    MESSAGE,
-    validate,
- } from '../config'
+import { MESSAGE } from '../config'
+import { register, isValidUser, getUserInfo} from '../models/user';
 
 const router = express.Router();
 
 router.post('/login', (req, res) => {
     const { account, password } = req.body;
-    
+
     const response = async () => {
-        let user = null;
-        if (account === '18814098638' && password === 'AZaz1108') {
-            user = account;
+        let isValid = isValidUser(account, password);
+        if (isValid) {
+            let userInfo = getUserInfo(account);
+            return res.json({
+                code: 0,
+                message: '请求成功',
+                result: {
+                    status: 0,
+                    desc: "登陆成功",
+                    userInfo: userInfo,
+                }
+            });
+        } else {
+            return res.json({
+                code: 0,
+                message: '请求成功',
+                result: {
+                    status: -1,
+                    desc: "登陆失败",
+                    userInfo: null,
+                }
+            });
         }
-        return res.json({
-            code: 0,
-            message: '请求成功',
-            data: {
-                user: user ? account : "",
-                key: user ? 123456 : "",
-            }
-        })
+
+    }
+
+    response();
+})
+
+router.post('/register', (req, res) => {
+    const { account, password } = req.body;
+
+    const response = async () => {
+        register(account, password);
+        return res.json(MESSAGE.REGISTER_SUCCESS)
     }
 
     response();
