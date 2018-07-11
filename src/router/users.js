@@ -10,14 +10,14 @@ router.post('/login', (req, res) => {
     const response = async () => {
         let isValid = isValidUser(account, password);
         if (isValid) {
-            let userInfo = getUserInfo(account);
+            // let userInfo = getUserInfo(account);
             return res.json({
                 code: 0,
                 message: '请求成功',
                 result: {
                     status: 0,
                     desc: "登陆成功",
-                    userInfo: userInfo,
+                    token: "12345"
                 }
             });
         } else {
@@ -27,7 +27,7 @@ router.post('/login', (req, res) => {
                 result: {
                     status: -1,
                     desc: "登陆失败",
-                    userInfo: null,
+                    token: null,
                 }
             });
         }
